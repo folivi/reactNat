@@ -2,7 +2,7 @@ import { createStore } from 'redux';
 
 const defaultState = {
     events: [],
-    selectedTab: 'dealsTab',
+    selectedTab: 'homeTab',
 };
 
 function store(state = defaultState, action) {

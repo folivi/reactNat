@@ -5,20 +5,30 @@
  */
 const Icon = require('react-native-vector-icons/Octicons');
 import Router from 'react-native-simple-router';
-
 import Home from './app/components/home';
+import Events from './app/components/events';
+import Search from './app/components/search';
 import store from './app/store';
 import React, { Component } from 'react';
+import styles from './app/stylesheets/app';
+const I18n = require('react-native-i18n');
 
 import {
     AppRegistry,
     TabBarIOS,
-    View,
 } from 'react-native';
 
 const homeRoute = {
     name: 'Home',
     component: Home,
+};
+const eventsRoute = {
+    name: 'Events',
+    component: Events,
+};
+const searchRoute = {
+    name: 'Search',
+    component: Search,
 };
 
 class ReduxApp extends Component {
@@ -43,8 +53,8 @@ class ReduxApp extends Component {
             tintColor = "white"
         >
             <Icon.TabBarItem
-                title = "Home"
-                iconName= {'calendar'}
+                title = {I18n.t('home')}
+                iconName= {'globe'}
                 selected = {
                     this.state.selectedTab === 'homeTab'
                 }
@@ -55,7 +65,10 @@ class ReduxApp extends Component {
                 }
 
             >
-                <Router firstRoute = {homeRoute} />
+                <Router
+                    firstRoute = {homeRoute}
+                    headerStyle = {styles.header}
+                />
             </Icon.TabBarItem>
             <Icon.TabBarItem
                 title = "Events"
@@ -70,7 +83,11 @@ class ReduxApp extends Component {
                 }
 
             >
-                <View></View>
+            <Router
+                firstRoute = {eventsRoute}
+                headerStyle = {styles.header}
+            />
+
             </Icon.TabBarItem>
             <Icon.TabBarItem
                 title = "Search"
@@ -85,11 +102,25 @@ class ReduxApp extends Component {
                 }
 
             >
-                <View></View>
+            <Router
+                firstRoute = {searchRoute}
+                headerStyle = {styles.header}
+            />
+
             </Icon.TabBarItem>
         < /TabBarIOS>
     );
   }
 }
+I18n.fallbacks = true;
+
+I18n.translations = {
+  en: {
+    home: 'Home'
+  },
+  fr: {
+    home: 'Accueil'
+  }
+};
 
 AppRegistry.registerComponent('ReduxApp', () => ReduxApp);

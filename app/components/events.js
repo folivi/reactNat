@@ -10,11 +10,11 @@ import {
   View,
 } from 'react-native';
 
-export default class Home extends Component {
+export default class Events extends Component {
     render() {
         return (
             <View>
-                <Text>Home</Text>
+                <Text>Events</Text>
             </View>
         );
     }
