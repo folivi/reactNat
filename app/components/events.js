@@ -1,21 +1,55 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   Text,
   View,
+  ScrollView
 } from 'react-native';
 
-export default class Events extends Component {
+import styles from '../stylesheets/app';
+import EventListItem from './events-list-item';
+import EventDetail from './event-detail';
+
+const propTypes = {
+    toRoute: PropTypes.func.isRequired,
+};
+
+class Events extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            events: [],
+        };
+        this.showEvent = this.showEvent.bind(this);
+    }
+
+    componentDidMount() {
+    }
+
+    showEvent() {
+        this.props.toRoute({
+          name: 'Event',
+          component: EventDetail
+        });
+    }
+
     render() {
         return (
-            <View>
-                <Text>Events</Text>
-            </View>
+            <ScrollView
+                style={styles.scrollView}
+                contentContainerStyle={styles.contentContainer}
+                automaticallyAdjustContentInsets={true}
+            >
+                {
+                  this.state.events.map(function(event){
+                      return (
+                          <EventListItem {...event} key={event.id} showEvent= {this.showEvent} />
+                    )
+                  })
+                }
+             </ScrollView>
         );
     }
 }
+Events.propTypes = propTypes;
+
+export default Events;

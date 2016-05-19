@@ -1,8 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+
 const Icon = require('react-native-vector-icons/Octicons');
 import Router from 'react-native-simple-router';
 import Home from './app/components/home';
